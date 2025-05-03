@@ -44,6 +44,12 @@ Step-by-Step:
 3. Return the filtered result.
 */
 
+function filterProducts(productArr, callbackFunction) {
+  return productArr.filter(callbackFunction);
+}
+
+let inStockProducts = filterProducts(products, product => product.inStock);
+console.log(inStockProducts);
 
 /*
 🔹 Task 2: Transform Product Names
@@ -56,6 +62,8 @@ Step-by-Step:
 3. Store the result in a new variable.
 */
 
+let uppercaseNames = products.map(product => product.name.toUpperCase());
+console.log(uppercaseNames);
 
 /*
 🔹 Task 3: Generate Discounted Prices
@@ -70,6 +78,15 @@ Step-by-Step:
 3. Use this returned function inside a `map()` call to apply discounts to all products.
 */
 
+function applyDiscount(discountPercent) {
+  return function(productObject) {
+    return productObject.price * discountPercent;
+  }
+}
+
+let halve = applyDiscount(0.5);
+let productsHalved = products.map(product => ({...product, price: halve(product)}));
+console.log(productsHalved);
 
 /*
 🔹 Task 4: Calculate Total Inventory Value
@@ -82,6 +99,8 @@ Step-by-Step:
 3. Store the total in a new variable.
 */
 
+let sumOfInStockProducts = inStockProducts.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0);
+console.log(sumOfInStockProducts);
 
 // ============================================
 // 🧪 Console Test Your Work
